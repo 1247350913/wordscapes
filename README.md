@@ -1,3 +1,3 @@
 # wordscapes
 
-When stuck with a tough word, find all potential words using letters available
+function that takes in n characters and outputs all possible english words
