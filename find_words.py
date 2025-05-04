@@ -1,23 +1,44 @@
-import itertools
+import re
 
-# Load dictionary (Linux/Mac). For Windows, use a custom word list
+# Load a word list (ensure it's in the same folder or provide full path)
 with open("/usr/share/dict/words", "r") as file:
-    valid_words = set(word.strip().lower() for word in file if len(word.strip()) >= 3)
+    WORDS = set(word.strip().lower() for word in file if word.strip().isalpha())
 
-def find_words(letters):
-    letters = letters.lower()
-    found = set()
+def matches(word, known_pattern, available_letters):
+    if len(word) != len(known_pattern):
+        return False
+    used = list(available_letters)
+    for i, char in enumerate(known_pattern):
+        if char == '_':
+            if word[i] not in used:
+                return False
+            used.remove(word[i])
+        else:
+            if word[i] != char:
+                return False
+    return True
 
-    for i in range(3, len(letters)+1):
-        for combo in itertools.permutations(letters, i):
-            word = ''.join(combo)
-            if word in valid_words:
-                found.add(word)
-    return sorted(found)
+def main():
+    print("=== Wordscapes Solver ===")
+    word_length = int(input("Enter desired word length: ").strip())
+    known = input("Enter known letters pattern (use _ for unknowns): ").strip().lower()
+    letters = input("Enter available letters: ").strip().lower()
 
-# Example use
-if __name__ == "__main__":
-    user_input = input("Enter your letters: ")
-    results = find_words(user_input)
+    if len(known) != word_length:
+        print("Error: Pattern length must match word length.")
+        return
+
+    pattern = re.compile(f"^[{letters}]{{{word_length}}}$")
+
+    results = sorted([
+        word for word in WORDS
+        if pattern.match(word)
+        and matches(word, known, letters)
+    ])
+
+    print(f"\nResults ({len(results)}):")
     for word in results:
         print(word)
+
+if __name__ == "__main__":
+    main()
