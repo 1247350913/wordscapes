@@ -1,6 +1,6 @@
 import re
 
-# Load a word list (ensure it's in the same folder or provide full path)
+# Load the english words dictionary list
 with open("/usr/share/dict/words", "r") as file:
     WORDS = set(word.strip().lower() for word in file if word.strip().isalpha())
 
