@@ -1,5 +1,6 @@
 # wordscapes
 
-run `python3 find_words.py` in the terminal to find potential words when stuck.
+1. clone or download the repo to a folder on your computer.
 
-(I do not use this tool since I am not stuck and have plenty of hints, but I thought this would be fun to make anyway)
+2. run `python3 find_words.py` in the terminal at that folder to find potential wordscapes words when stuck.
+3. 
