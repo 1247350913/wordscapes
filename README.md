@@ -1,4 +1,4 @@
-# Wordscapes Solver
+<h1 align="center">Wordscapes</h1>
 
 A lightweight command-line Python tool that helps solve **Wordscapes** puzzles by generating valid words from the puzzle letters and any known letter positions.
 
